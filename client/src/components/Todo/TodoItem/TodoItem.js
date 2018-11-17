@@ -15,7 +15,7 @@ import {LightIcon, PositionedWrapper, StopPropagation, StyledTypography} from ".
 
 const Wrapper = styled(Paper)`
 width: 400px;
-height: 100px;
+height: 75px;
 margin: .5rem auto;
 position:relative;
 overflow:hidden;
@@ -77,67 +77,108 @@ class TodoItem extends Component {
                     <ButtonBase
                         className="w-100 h-100 d-block" component="div">
                         <div className="row h-100 no-gutters justify-content-center">
-                            <div className="col-12 h-75 p-2 ">
-                                <div className="d-flex">
-                                    <div className="col-8">
-                                        <StyledTypography
-                                            component="h3"
-                                            bold
-                                            textTransform="capitalize"
-                                            fontSize="1rem"
-                                        >
-                                            todo name
-                                        </StyledTypography>
-                                    </div>
-                                    <div className="col d-flex justify-content-end p-0 mr-auto">
-                                        <ContextColor>
-                                            <MiniIconButton color="default"
+                            <div className="col-2 py-2 h-100 flex-column  d-flex align-items-sm-start bg-success">
+                                <StyledTypography
+                                    component="div"
+                                    textTransform="capitalize"
+                                    fontSize="1rem"
+                                    textAlign="center"
+                                    display="block"
+                                    width="100%"
+                                    color="#fff"
+                                >
+                                    00 : 57
+                                </StyledTypography>
+                            </div>
+                            <div className="col p-0 ">
+                                <div className="col-12 h-50 p-2 ">
+                                    <div className="d-flex">
+                                        <div className="col-8 ">
+                                            <div>
+                                                <StyledTypography
+                                                    component="h3"
+                                                    bold
+                                                    textTransform="capitalize"
+                                                    fontSize="1rem"
+                                                    lineHeight='1.1rem'
+                                                >
+                                                    todo name
+                                                </StyledTypography>
+                                                <StyledTypography
+                                                    component="span"
+                                                    bold
+                                                    textTransform="capitalize"
+                                                    fontSize=".8rem"
+                                                    textIndent=".1rem"
+                                                >
+                                                    todo name
+                                                </StyledTypography>
+                                            </div>
+                                        </div>
+                                        <div className="col d-flex justify-content-end p-0 mr-auto">
+                                            <ContextColor>
+                                                <MiniIconButton color="default"
+                                                                component={StopPropagation}
+                                                >
+                                                    <Icon>check</Icon>
+                                                </MiniIconButton>
+                                            </ContextColor>
+                                            <MiniIconButton color="secondary"
                                                             component={StopPropagation}
                                             >
-                                                <Icon>check</Icon>
+                                                <Icon fontSize="small">delete</Icon>
                                             </MiniIconButton>
-                                        </ContextColor>
-                                        <MiniIconButton color="secondary"
-                                                        component={StopPropagation}
-                                        >
-                                            <Icon fontSize="small">delete</Icon>
-                                        </MiniIconButton>
-                                        <RootRef rootRef={this.handleRef}>
-                                            <MiniIconButton
-                                                component={StopPropagation}
-                                                aria-label="More"
-                                                aria-owns={open ? 'long-menu' : undefined}
-                                                aria-haspopup="true"
-                                                onClick={this.handleClick}
+                                            <RootRef rootRef={this.handleRef}>
+                                                <MiniIconButton
+                                                    component={StopPropagation}
+                                                    aria-label="More"
+                                                    aria-owns={open ? 'long-menu' : undefined}
+                                                    aria-haspopup="true"
+                                                    onClick={this.handleClick}
+                                                >
+                                                    <Icon fontSize="small">more_vert</Icon>
+                                                </MiniIconButton>
+                                            </RootRef>
+                                            <PoperMenu
+                                                anchorEl={anchorEl}
+                                                open={open}
+                                                handleClose={handleClose}
                                             >
-                                                <Icon fontSize="small">more_vert</Icon>
-                                            </MiniIconButton>
-                                        </RootRef>
-                                        <PoperMenu
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            handleClose={handleClose}
-                                        >
-                                            <List>
-                                                <ListItem button> hello</ListItem>
-                                                <ListItem button> hello</ListItem>
-                                                <ListItem button> hello</ListItem>
-                                                <ListItem button> hello</ListItem>
-                                            </List>
-                                        </PoperMenu>
+                                                <List
+                                                    onMouseDown={e => e.stopPropagation()}
+                                                    onTouchStart={e => e.stopPropagation()}
+                                                    omMouseUp={e => e.stopPropagation()}
+                                                >
+                                                    <ListItem button> hello</ListItem>
+                                                    <ListItem button> hello</ListItem>
+                                                    <ListItem button> hello</ListItem>
+                                                    <ListItem button> hello</ListItem>
+                                                </List>
+                                            </PoperMenu>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-12 h-25 bg-success  p-1 d-flex">
+                                <div className="col-12 h-50   p-1 d-flex">
+                                    <div className="col d-flex align-items-center text-center">
+                                        <StyledTypography
+                                            component="p"
+                                            textTransform="capitalize"
+                                            fontSize=".8rem"
+                                            textIndent=".1rem"
+                                        >
+                                            Lorem ipsum dolor sit amet.
+                                        </StyledTypography>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <ContextColor>
                             <PositionedWrapper
                                 position='absolute'
                                 top="50%"
-                                left="20px"
+                                left="50%"
+                                transform="translate3d(-395%,-30%,0)"
                             >
-                                {/* transform="translate3d(0,-50%,0)"*/}
                                 <Button variant="fab" mini color="primary"
                                         component={StopPropagation}
                                 ><LightIcon>play_arrow</LightIcon></Button>

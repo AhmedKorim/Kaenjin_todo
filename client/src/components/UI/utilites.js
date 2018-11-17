@@ -29,5 +29,6 @@ export const StopPropagation = props => <Button
     {...props}
     onMouseDown={e => e.stopPropagation()}
     onTouchStart={e => e.stopPropagation()}
+    omMouseUp={e => e.stopPropagation()}
 
 />
