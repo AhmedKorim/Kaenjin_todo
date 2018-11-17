@@ -16,6 +16,11 @@ const MainHeader = props => {
                     >
                         <IconButton color="default"><LightIcon>alarm</LightIcon></IconButton>
                     </PositionedWrapper>
+                    <PositionedWrapper
+                        right={190}
+                    >
+                        <IconButton color="default"><LightIcon>notifications_none</LightIcon></IconButton>
+                    </PositionedWrapper>
                 </Toolbar>
                 <Sidebar/>
             </Fragment>

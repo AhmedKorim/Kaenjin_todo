@@ -4,7 +4,7 @@ export const AppMainWrapper = styled.main.attrs({
     style: ({headerHeight}) => {
         console.log(headerHeight);
         return {
-            paddingTop:headerHeight ||68
+            paddingTop:(headerHeight ||68) +10
         }
     }
 })`

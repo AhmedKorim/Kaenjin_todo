@@ -10,6 +10,9 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 
 const store = getStore();
 const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+    },
 });
 ReactDOM.render(
     <Provider store={store}>
