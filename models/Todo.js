@@ -5,9 +5,13 @@ const TodoSchema = new Schema({
     title: {
         type: String,
         required: true
-    }, category: {
+    },
+    category: {
         type: Schema.Types.ObjectId,
         ref: "Category"
+    },
+    description:{
+      type:String,
     },
     user:{
         type:Schema.Types.ObjectId,
@@ -37,7 +41,6 @@ const TodoSchema = new Schema({
     },
     cleared: {
         type: Date,
-        required: true
     },
 
 })

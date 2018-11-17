@@ -1,12 +1,15 @@
 const Express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
+
+const {secretOrKey} = require('../../config/keys');
 
 // models
 const User = require('../../models/User');
+const Category = require('../../models/Category');
+const Project = require('../../models/Project');
+
 const router = Express.Router();
-const {secretOrKey} = require('../../config/keys');
 
 
 router.post('/register', async (req, res, next) => {
@@ -31,19 +34,44 @@ router.post('/register', async (req, res, next) => {
                     newUser.password = hashPassword;
                     const user = await newUser.save();
                     if (user) {
-                        res.status(200)
-                            .json({
-                                message: 'user created',
-                                user: {
-                                    name: user.name,
-                                }
+                        const defaultCategory = new Category({
+                            categories: ['inbox'],
+                            user: user._id
+                        })
+                        const defaultProject = new Project({
+                            title: 'daily rotten',
+                            user: user._id
+                        })
+                        try {
+                            const [UserCategory, userProject] = await Promise.all([
+                                defaultCategory.save(),
+                                defaultProject.save()
+                            ]);
+                            if (UserCategory && userProject) {
+                                res.status(200)
+                                    .json({
+                                        message: 'user created',
+                                        user: {
+                                            name: user.name,
+                                            Categories: UserCategory,
+                                            projects:defaultProject
+                                        }
+                                    })
+                            }
+
+                        } catch (e) {
+                            res.stat(500).json({
+                                message: 'internal server error'
                             })
+                        }
+
+
                     }
                 })
             })
         }
     } catch (e) {
-        res.status(500).json({message:'internal server error'});
+        res.status(500).json({message: 'internal server error'});
     }
 
 })
