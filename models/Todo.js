@@ -10,20 +10,20 @@ const TodoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Category"
     },
-    description:{
-      type:String,
+    description: {
+        type: String,
     },
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:'User'
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     addedAtt: {
         type: Date,
         default: Date.now()
     },
-    Project: {
-        type: String,
-        default: null
+    project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
     },
     state: {
         schedule: {

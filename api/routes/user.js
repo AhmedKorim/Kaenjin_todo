@@ -35,13 +35,13 @@ router.post('/register', async (req, res, next) => {
                     const user = await newUser.save();
                     if (user) {
                         const defaultCategory = new Category({
-                            user: user._id
+                            user: user._id,
+                            title:'inbox'
                         })
                         const defaultProject = new Project({
                             title: 'daily rotten',
                             user: user._id
                         })
-                        defaultCategory.categories.push({title:'inbox'});
                         try {
                             const [UserCategory, userProject] = await Promise.all([
                                 defaultCategory.save(),

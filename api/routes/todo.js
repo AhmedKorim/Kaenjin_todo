@@ -5,7 +5,7 @@ const router = Express.Router();
 
 
 // modles
-const Project = require('../../models/User');
+const Project = require('../../models/Project');
 const Category = require('../../models/Category');
 const Todo = require('../../models/Todo');
 
@@ -22,22 +22,21 @@ const Todo = require('../../models/Todo');
 
 router.post("/", passport.authenticate('jwt', {session: false}), async (req, res) => {
         try {
-            console.log(req);
             const {_id} = req.user;
             let {title, category, project, description} = req.body;
             if (!project || !category) {
                 try {
-                    const [defalutProject, defalutCategory] =await Promise.all([
-                        Category.findOne({user: _id}),
-                        Project.findOne({user: _id})
+                    const [defalutProject, defalutCategory] = await Promise.all([
+                        Project.findOne({user: _id}),
+                        Category.findOne({user: _id})
                     ])
-
-                    project = project || defalutProject.categories[0]._id;
-                    category = category || defalutCategory[0]._id;
+                    category = category || defalutCategory._id;
+                    project = project || defalutProject._id;
                 } catch (e) {
                     console.log(e);
                     return res.status(500).json({})
                 }
+
                 const newTodo = new Todo({
                     user: _id,
                     title,
@@ -59,5 +58,31 @@ router.post("/", passport.authenticate('jwt', {session: false}), async (req, res
 
     }
 )
+
+router.get('/', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const {_id} = req.user;
+            const todos = await  Todo.find({user:_id})
+                .populate([{
+                    path:'category',
+                    select:'_id title'
+                },{
+                    path:'project',
+                    select:'_id title'
+                }]);
+            if(todos){
+                res.status(200)
+                    .json({
+                        todos: todos
+                    })
+
+            }
+
+    } catch (e) {
+
+    }
+
+})
+
 
 module.exports = router;

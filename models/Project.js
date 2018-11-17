@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
@@ -12,10 +16,6 @@ const ProjectSchema = new Schema({
             ref: "Category"
         }
     ],
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
     stages: [
         {
             title: {
