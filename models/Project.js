@@ -12,6 +12,10 @@ const ProjectSchema = new Schema({
             ref: "Category"
         }
     ],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     stages: [
         {
             title: {

@@ -9,6 +9,10 @@ const TodoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Category"
     },
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    },
     addedAtt: {
         type: Date,
         default: Date.now()
