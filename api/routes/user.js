@@ -35,13 +35,13 @@ router.post('/register', async (req, res, next) => {
                     const user = await newUser.save();
                     if (user) {
                         const defaultCategory = new Category({
-                            categories: ['inbox'],
                             user: user._id
                         })
                         const defaultProject = new Project({
                             title: 'daily rotten',
                             user: user._id
                         })
+                        defaultCategory.categories.push({title:'inbox'});
                         try {
                             const [UserCategory, userProject] = await Promise.all([
                                 defaultCategory.save(),
@@ -60,7 +60,7 @@ router.post('/register', async (req, res, next) => {
                             }
 
                         } catch (e) {
-                            res.stat(500).json({
+                            res.status(500).json({
                                 message: 'internal server error'
                             })
                         }
