@@ -1,0 +1,17 @@
+{
+  "name": "Kaenjin_todo",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "ahmedkorim <ahmedkorrim@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --inspect server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "latest",
+    "mongoose": "^5.3.12",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0"
+  }
+}

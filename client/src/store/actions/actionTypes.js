@@ -1,0 +1,2 @@
+export const REMOVE_ALL = 'REMOVE_ALL';
+export const REMOVE_SELECTED = 'REMOVE_SELECTED';
