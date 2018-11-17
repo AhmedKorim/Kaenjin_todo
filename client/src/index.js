@@ -9,7 +9,8 @@ import getStore from './store/store';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 
 const store = getStore();
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+});
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
