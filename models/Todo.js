@@ -5,14 +5,13 @@ const TodoSchema = new Schema({
     title: {
         type: String,
         required: true
+    }, category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category"
     },
     addedAtt: {
         type: Date,
         default: Date.now()
-    },
-    category: {
-        type: String,
-        default: 'main'
     },
     Project: {
         type: String,
