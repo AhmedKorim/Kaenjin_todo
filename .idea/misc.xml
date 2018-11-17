@@ -3,9 +3,6 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
-  <component name="MongoConfiguration">
-    <option name="shellPath" value="C:\Program Files\MongoDB\Server\4.1\bin\mongo.exe" />
-  </component>
   <component name="VagrantProjectSettings">
     <option name="instanceFolder" value="" />
     <option name="provider" value="" />

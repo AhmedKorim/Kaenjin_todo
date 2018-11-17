@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport')
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const user = require('./api/routes/user');
 // connect to db
 mongoose.connect('mongodb://localhost:27017/ceevo_todo', err => {
     if (!err) return console.log('connected to db');
@@ -26,7 +27,7 @@ app.use(morgan('dev'))
 // cors headers
 app.use(cors());
 
-
+app.use('/api/auth',user)
 app.get('/', (req, res) => {
     res.status(200)
         .json({
