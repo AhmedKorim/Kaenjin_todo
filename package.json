@@ -8,10 +8,12 @@
     "start": "nodemon --inspect server.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "latest",
     "mongoose": "^5.3.12",
     "morgan": "^1.9.1",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   }
 }
