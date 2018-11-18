@@ -59,6 +59,10 @@ transform: translate3d(-50%,-50%,0) scale(1);
 border-radius: 50%;
 
 `
+export const MinWidht = styled.div`
+min-width:${({MW}) => MW + 'px'}
+`
+
 export const DumbWrapper = styled.div.attrs({
     style: ({...s}) => ({...s})
 })`

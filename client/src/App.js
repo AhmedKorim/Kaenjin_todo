@@ -46,7 +46,8 @@ class App extends Component {
                             <Typography className="text-center"
                                         color="inherit">
                                 Remove all
-                            </Typography></Button>
+                            </Typography>
+                        </Button>
                     </div>
                 </AppMainWrapper>
                 <MainFab/>

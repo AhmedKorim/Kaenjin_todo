@@ -44,7 +44,7 @@
 }
 
 .rippleOut {
-  animation: rippleOut .6s ease-in-out forwards;
+  animation: rippleOut .5s ease-in-out forwards;
 }
 
 @keyframes rippleIn {
@@ -73,7 +73,7 @@
     @include ripple(20)
   }
   80% {
-    @include ripple(3)
+    @include ripple(1)
   }
   to {
     @include ripple(0)

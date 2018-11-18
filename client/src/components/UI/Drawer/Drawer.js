@@ -1,23 +1,32 @@
-import PropTypes from 'prop-types'
+import {withStyles} from '@material-ui/core'
 import Drawer from "@material-ui/core/Drawer/Drawer";
+import PropTypes from 'prop-types'
 import React from 'react'
-import {withStyles} from'@material-ui/core'
-const styles = theme =>({
-    MainDrawerPaper:{
-        width:240,
-        border:'none',
-        boxShadow:theme.shadows[14]
+
+const styles = theme => ({
+    MainDrawerPaper: {
+        width: 240,
+        border: 'none',
+        transition: "all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms !important",
+        overflow:'hidden',
+        boxShadow: theme.shadows[15],
+        '&.mini': {
+            width: 80,
+            boxShadow: theme.shadows[14]
+
+        }
     }
 })
-const DrawerWrapper = ({toggleDrawer, anchor, open, children,classes}) => {
+const DrawerWrapper = ({toggleDrawer, anchor, open, children, classes, mini, expanded,...other}) => {
     console.log(classes);
     return (
         <Drawer open={open}
                 anchor={anchor || 'left'}
-                variant="persistent"
+                variant="permanent"
+                {...other}
                 PaperProps={{
                     classes: {
-                        root: classes.MainDrawerPaper
+                        root: (mini && !expanded) ? classes.MainDrawerPaper + ' mini ' : classes.MainDrawerPaper
                     }
                 }}
                 ModalProps={{
@@ -26,7 +35,6 @@ const DrawerWrapper = ({toggleDrawer, anchor, open, children,classes}) => {
                 }
                 }
         >
-
             {children}
         </Drawer>
     )
