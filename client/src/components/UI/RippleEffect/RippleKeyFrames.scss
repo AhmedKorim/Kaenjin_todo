@@ -40,22 +40,21 @@
 }
 
 .rippleIn {
-  animation: rippleIn .99s ease-in-out forwards;
+  animation: rippleIn .6s ease-in-out forwards;
 }
 
 .rippleOut {
-  animation: rippleOut .99s ease-in-out forwards;
+  animation: rippleOut .6s ease-in-out forwards;
 }
 
 @keyframes rippleIn {
   0% {
     @include ripple(1)
   }
-  10% {
+
+
+ 40% {
     @include ripple(2)
-  }
-  40% {
-    @include ripple(12)
   }
   to {
     @include ripple(100)
@@ -66,11 +65,15 @@
   0% {
     @include ripple(99)
   }
-  5% {
-    @include ripple(50)
+  1%{
+    @include ripple(25)
+
   }
-  10% {
+  5% {
     @include ripple(20)
+  }
+  80% {
+    @include ripple(3)
   }
   to {
     @include ripple(0)

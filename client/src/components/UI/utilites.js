@@ -8,12 +8,20 @@ color: #fff;
 `
 
 export const PositionedWrapper = styled.div.attrs({
-    style: ({top, left, right, bottom,  elevation, ...other}) =>
-        ({top, left, right, bottom, zIndex:elevation, ...other})
+    style: ({top, left, right, bottom, elevation, ...other}) =>
+        ({top, left, right, bottom, zIndex: elevation, ...other})
 })`
 position: ${({position}) => position || 'absolute'};
 transition: all ease-in-out ${({duration}) => duration ? duration : 0};
 `;
+
+export const StyledButton = styled(Button)`
+{min-width: unset!important;
+min-height: unset !important;
+border-radius: 50% !important;
+height: 40px;
+width: 40px;}
+`
 
 
 export const StyledTypography = styled(Typography).attrs({

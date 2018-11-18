@@ -1,20 +1,18 @@
 import {Paper} from "@material-ui/core";
-import Button from "@material-ui/core/Button/Button";
 import ButtonBase from "@material-ui/core/ButtonBase/ButtonBase";
-import Grow from "@material-ui/core/Grow/Grow";
 import Icon from "@material-ui/core/Icon/Icon";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import RootRef from "@material-ui/core/RootRef/RootRef";
+import * as $ from 'jquery';
 import * as PropTypes from "prop-types";
 import React, {Component, Fragment} from 'react'
 import styled from 'styled-components';
 import {ContextColor} from "../../../HOC/WithContextColors";
 import PoperMenu from "../../UI/Menu/Menu";
 import RippleEffect from "../../UI/RippleEffect/RippleEffect";
-import {LightIcon, PositionedWrapper, StopPropagation, StyledTypography} from "../../UI/utilites";
-import * as $ from 'jquery';
+import {LightIcon, PositionedWrapper, StopPropagation, StyledButton, StyledTypography} from "../../UI/utilites";
 
 const Wrapper = styled(Paper)`
 width: 400px;
@@ -89,7 +87,7 @@ class TodoItem extends Component {
     handleAction = (e, key, action) => {
         // handler coordinates
         const {clientX, clientY} = e;
-        const rippleParam = {
+        const _rippleParam = {
             x: clientX - this.state.left,
             y: clientY - this.state.top
         }
@@ -102,13 +100,14 @@ class TodoItem extends Component {
         * pause -> running = true
         * */
 
-        console.log(rippleParam);
+
         if (!action) {
             // use that key
-
-            let rippleParam = this.defaultRippleParam || defaultRippleParam;
-            console.log(this.defaultRippleParam);
             const stateProportion = (key === 'play_arrow' || key === 'pause') ? 'running' : 'deleted'
+            let defaultRippleParam = this.defaultRippleParam || defaultRippleParam;
+            console.log(this.state[stateProportion]);
+            let rippleParam = this.state[stateProportion] ? defaultRippleParam : _rippleParam;
+            console.log(rippleParam);
             this.setState(prevState => ({
                 [stateProportion]: !prevState[stateProportion],
                 rippleParam
@@ -116,7 +115,7 @@ class TodoItem extends Component {
         } else {
             this.setState({
                 [action]: true,
-                rippleParam
+                rippleParam: _rippleParam
             });
         }
 
@@ -129,17 +128,16 @@ class TodoItem extends Component {
                 width: $(wrapper).width(),
                 height: $(wrapper).height(),
                 ...$(wrapper).offset()
-            },this.getDefaultRippleParam)
+            }, this.getDefaultRippleParam)
         }
     }
 
     getDefaultRippleParam() {
         const fab = this.fabWrapper;
         if (fab) {
-            const {left,top} = $(fab).offset();
-            console.log($(fab).offset());
+            const {left, top} = $(fab).offset();
             this.defaultRippleParam = {
-                x:  left - this.state.left,
+                x: left - this.state.left,
                 y: top - this.state.top
             }
         }
@@ -182,7 +180,7 @@ class TodoItem extends Component {
                             visible={deleted || running}
                             top={y}
                             left={x}
-                            $color='green'
+                            $color={deleted ? '#E57373' : 'green'}
                         />
                         <ButtonBase
                             className="w-100 h-100 d-block base-wrapper" component="div">
@@ -292,15 +290,16 @@ class TodoItem extends Component {
                                 top="50%"
                                 left={deleted || running ? deleted ? "80%" : "50%" : "16%"}
                                 transform={deleted || running ? "translate3d(-50%,-50%,0)" : "translate3d(-50%,-30%,0)"}
-                                duration=".3s"
+                                duration=".4s"
+                                transitionDelay=".1s"
                                 elevation={1400}
                             >
-                                <Button variant="fab" mini color="primary"
-                                        onClick={e => handleAction(e, key)}
+                                <StyledButton variant={deleted ? "flat" :"fab" } mini color='primary'
+                                              onClick={e => handleAction(e, key)}
                                 ><LightIcon>
                                     {key}
                                 </LightIcon>
-                                </Button>
+                                </StyledButton>
                             </PositionedWrapper>
                         </ContextColor>
                     </Wrapper>
