@@ -29,3 +29,10 @@ export const ContextColor = withContextColor({
 })(props => <Fragment>
     {props.children}
 </Fragment>);
+
+
+export const DarkTheme = withContextColor({
+    type: 'dark',
+})(props => <Fragment>
+    {props.children}
+</Fragment>);

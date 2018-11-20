@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import {ContextColor} from "../../../HOC/WithContextColors";
 import PoperMenu from "../../UI/Menu/Menu";
 import RippleEffect from "../../UI/RippleEffect/RippleEffect";
-import {LightIcon, PositionedWrapper, StopPropagation, StyledButton, StyledTypography} from "../../UI/utilites";
+import {LightIcon, MiniIconButton, PositionedWrapper, StopPropagation, StyledButton, StyledTypography} from "../../UI/utilites";
 
 const Wrapper = styled(Paper)`
 width: 400px;
@@ -26,16 +26,7 @@ overflow:hidden;
 }
 
 `
-const MiniIconButton = styled(IconButton)`
-&&{width: 30px;
-height: 30px;
-min-height: unset;
-min-width: unset;
-padding: 0;
 
-}
-
-`
 
 const options = [
     'None',

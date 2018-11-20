@@ -41,23 +41,33 @@
 
 .rippleIn {
   animation: rippleIn .6s ease-in-out forwards;
+  opacity:0;
+
 }
 
 .rippleOut {
+  opacity:1 ;
+
   animation: rippleOut .5s ease-in-out forwards;
 }
 
 @keyframes rippleIn {
   0% {
-    @include ripple(1)
+    @include ripple(1);
+    opacity:.3 ;
+
   }
 
 
  40% {
-    @include ripple(2)
-  }
+    @include ripple(2);
+   opacity:1 ;
+
+ }
   to {
-    @include ripple(100)
+    @include ripple(100);
+    opacity:1 ;
+
   }
 }
 

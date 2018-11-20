@@ -6,10 +6,12 @@ import {withRouter} from "react-router-dom";
 import './App.css';
 import {AppMainWrapper} from "./components/layout/AppMainWrapper";
 import MainHeader from "./components/layout/MainHeader/MainHeader";
+import PomodoroTimer from "./components/layout/PomodoroTimer/Pomodoro";
 import DraggableView from "./components/UI/DragbleView/DraggableView";
 import SidebarToggler from "./components/UI/Drawer/DrawerToggler";
 import MainFab from "./components/UI/MainFab/MainFab";
 import AppRoutes from "./Containers/AppRoutes/AppRoutes";
+import {DarkTheme} from "./HOC/WithContextColors";
 import {REMOVE_ALL, REMOVE_SELECTED} from "./store/actions/actionTypes";
 import {miniSideBarSelector} from "./store/selectors/layoutSelectors";
 
@@ -28,7 +30,7 @@ class App extends Component {
 
 
     render() {
-        const {removeAll, removeSelected,miniHeader} = this.props;
+        const {removeAll, removeSelected, miniHeader} = this.props;
         return (
             <Fragment>
                 <SidebarToggler/>
@@ -40,10 +42,12 @@ class App extends Component {
                         </div>
                     </PerfectScrollbar>
                 </AppMainWrapper>
-                <DraggableView/>
+                <PomodoroTimer/>
                 <MainFab/>
             </Fragment>
-        );
+
+        )
+            ;
     }
 }
 
@@ -52,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
     removeSelected: () => dispatch({type: REMOVE_SELECTED})
 })
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     miniHeader: miniSideBarSelector(state)
 })
 

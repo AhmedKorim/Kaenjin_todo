@@ -14,7 +14,15 @@ height: 30px;
 min-height: unset;
 min-width: unset;
 padding: 0;
+}
+`
 
+export const MiniButton = styled(Button)`
+&&{width: 25px;
+height: 25px;
+min-height: unset;
+min-width: unset;
+padding: 0;
 }
 `
 
@@ -63,7 +71,6 @@ export const StopPropagation = (props) => {
         omMouseUp,
         onClick
     } = props
-    console.log(props.color, 'StopPropagation');
     return <ButtonBase
         {...props}
         onMouseDown={e => (e.stopPropagation(), onMouseDown && onMouseDown(e))}

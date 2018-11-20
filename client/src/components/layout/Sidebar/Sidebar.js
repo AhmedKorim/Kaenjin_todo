@@ -75,6 +75,9 @@ class Sidebar extends React.Component {
                                 {
                                     title: 'Settings',
                                     icon: 'settings'
+                                },{
+                                    title: 'history',
+                                    icon: 'history'
                                 }, {
                                     title: 'Help',
                                     icon: 'help'

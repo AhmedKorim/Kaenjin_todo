@@ -1,11 +1,11 @@
+import Button from "@material-ui/core/Button/Button";
+import Grow from "@material-ui/core/Grow/Grow";
 import Icon from "@material-ui/core/Icon/Icon";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Paper from "@material-ui/core/Paper/Paper";
+import * as $ from 'jquery';
 import React from 'react';
 import {Motion, spring} from "react-motion";
-import Fab from "../MainFab/Fab";
-import {MiniIconButton, PositionedWrapper, StopPropagation} from "../utilites";
-import * as $ from 'jquery';
+import {MiniButton, MiniFabButton, PositionedWrapper, StopPropagation} from "../utilites";
 
 class DraggableView extends React.Component {
     state = {
@@ -60,6 +60,7 @@ class DraggableView extends React.Component {
 
     render() {
         const config = {stiffness: 120, damping: 10, precision: .1};
+        const {children} = this.props;
         const {
             handleMouseDown,
             handleTouchStart,
@@ -70,8 +71,8 @@ class DraggableView extends React.Component {
         return (
             <PositionedWrapper
                 ref={node => this.wrapper = node}
-                width='250px'
-                height='200px'
+                width='280px'
+                height='250px'
                 position="fixed"
                 elevation="99999"
                 class="bg-dark"
@@ -87,16 +88,24 @@ class DraggableView extends React.Component {
                     {({shadow}) => <Paper className="w-100 h-100"
                                           elevation={Math.floor(shadow)}
                     >
-                        <PositionedWrapper>
-                            <IconButton
-                                color="secondary"
-                                component={StopPropagation}
-
-
-                            >
-                                <Icon>close</Icon>
-                            </IconButton>
+                        <PositionedWrapper
+                            right="0"
+                            top="0"
+                            transform="translate3d(50%,-50%,0)"
+                        >
+                            <Grow unmountOnExit mountOnEnter in={!up} timeout={300}>
+                                <MiniButton
+                                    color="secondary"
+                                    variant="fab"
+                                    component={StopPropagation}
+                                >
+                                    <Icon fontSize="small">close</Icon>
+                                </MiniButton>
+                            </Grow>
                         </PositionedWrapper>
+                        {
+                            children
+                        }
                     </Paper>
                     }
                 </Motion>
