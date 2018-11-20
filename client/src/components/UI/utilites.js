@@ -15,6 +15,14 @@ position: ${({position}) => position || 'absolute'};
 transition: all ease-in-out ${({duration}) => duration ? duration : 0};
 `;
 
+export const Container = styled.div`
+width: calc(100vw - 240px);
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+`
+
 export const StyledButton = styled(Button)`
 {min-width: unset!important;
 min-height: unset !important;

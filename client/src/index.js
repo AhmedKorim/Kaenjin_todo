@@ -11,7 +11,7 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 const store = getStore();
 const theme = createMuiTheme({
     palette:{
-        type:'dark'
+        type:'light'
     },
     typography: {
         useNextVariants: true,

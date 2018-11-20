@@ -48,11 +48,14 @@ class Sidebar extends React.Component {
                                     icon: 'dashboard'
                                 },
                                 {
-                                    title: 'Week plan',
+                                    title: 'Week_plan',
                                     icon: 'today'
                                 }, {
                                     title: 'Projects',
                                     icon: 'card_travel'
+                                },{
+                                    title: 'Team_work',
+                                    icon: 'group_work'
                                 }, {
                                     title: 'Categories',
                                     icon: 'category'

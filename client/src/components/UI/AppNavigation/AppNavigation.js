@@ -4,13 +4,23 @@ import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import React from 'react'
 import {StyledTypography} from "../utilites";
+import {NavLink} from 'react-router-dom'
 
-const AppNavigation = ({mini, expanded, links:{top,bottom}}) => {
+export const customNavLink = to => props => {
+    return <NavLink
+        to={to}
+        {...props}
+    />;
+}
+
+const AppNavigation = ({mini, expanded, links: {top, bottom}}) => {
+    console.log('render');
+
     return (
         <nav className="d-flex flex-column h-100">
             <div>
                 <List component="ul">
-                    {top.map(({icon, title}) => <ListItem component="li" button className="">
+                    {top.map(({icon, title}) => <ListItem component={customNavLink(title)} button className="">
                             <div className="d-flex align-items-center justify-content-start   w-100">
                                 <div className="text-center  d-flex align-items-center ">
                                     <Icon color="primary">{icon}</Icon>
@@ -22,7 +32,7 @@ const AppNavigation = ({mini, expanded, links:{top,bottom}}) => {
                                             whiteSpace="nowrap"
                                             component="div"
                                         >
-                                            {title}
+                                            {title.replace(/_/, ' ')}
                                         </StyledTypography>
                                     </div>
                                 </Fade>
@@ -45,7 +55,7 @@ const AppNavigation = ({mini, expanded, links:{top,bottom}}) => {
                                             whiteSpace="nowrap"
                                             component="div"
                                         >
-                                            {title}
+                                            {title.replace(/_/, ' ')}
                                         </StyledTypography>
                                     </div>
                                 </Fade>
