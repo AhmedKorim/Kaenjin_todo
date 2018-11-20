@@ -1,4 +1,5 @@
 import React from 'react';
+import AppSection from "../../HOC/Section";
 
 class Settings extends React.Component {
     render() {
@@ -8,4 +9,4 @@ class Settings extends React.Component {
     }
 }
 
-export default Settings;
+export default AppSection(Settings);

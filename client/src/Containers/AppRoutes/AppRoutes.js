@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import {Redirect, Route,Switch} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Todos from "../../components/Todo/Todos/Todo";
 import Alarms from "../pages/Alarms";
@@ -17,17 +17,15 @@ const AppRoutes = props => {
     return (
         <Fragment>
             <Route
-                path="/"
-                exact
-                render={_ => <Redirect to="/dashboard"/>}
-            />
-            <Route
-                path="/"
-                exact
-                render={({location}) =>
+                render={({location}) => <Fragment>
+                    <Route
+                        path="/"
+                        exact
+                        render={_ => <Redirect to="/dashboard"/>}
+                    />
                     <TransitionGroup>
-                        <CSSTransition classNames="fade" timeout={300} key={location.key}>
-                         <Switch>
+                        <CSSTransition classNames="fade" timeout={300} key={location.pathname}>
+                         <Switch location={location}>
                             <Route
                                 path='/dashboard'
                                 component={MainDashboard}
@@ -72,9 +70,9 @@ const AppRoutes = props => {
                         </CSSTransition>
                     </TransitionGroup>
 
-                }
+                </Fragment> }
             />
         </Fragment>
     )
 }
-export default AppRoutes
+export default withRouter(AppRoutes)

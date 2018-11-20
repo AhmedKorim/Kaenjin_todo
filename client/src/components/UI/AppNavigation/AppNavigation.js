@@ -9,7 +9,7 @@ import {NavLink} from 'react-router-dom'
 
 export const customNavLink = to => props => {
     return <NavLink
-        to={to}
+        to={to.toLowerCase()}
         {...props}
     />;
 }
@@ -44,14 +44,13 @@ const AppNavigation = ({mini, expanded, links: {top, bottom}}) => {
             </div>
             <div className="mt-auto">
                 <List component="ul">
-                    {bottom.map(({icon, title}) => <ListItem component="li" button className="">
+                    {bottom.map(({icon, title}) => <ListItem component={customNavLink(title)} button className="">
                             <div className="d-flex align-items-center justify-content-start   w-100">
                                 <div className="text-center  d-flex align-items-center ">
                                     <Icon color="primary">{icon}</Icon>
                                 </div>
                                 <Fade in={expanded || !mini} timeout={300} style={{transitionDelay: (expanded || !mini) ? '.1s' : '0'}}>
-
-                                <div className="ml-2 d-flex  align-items-center justify-content-center">
+                                    <div className="ml-2 d-flex  align-items-center justify-content-center">
                                         <StyledTypography
                                             fontSize="1rem"
                                             whiteSpace="nowrap"

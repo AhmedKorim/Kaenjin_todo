@@ -21,6 +21,8 @@ width: calc(100vw - 240px);
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  background-color:red;
+  position:relative;
 `
 
 export const StyledButton = styled(Button)`

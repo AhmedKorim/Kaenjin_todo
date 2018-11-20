@@ -1,8 +1,27 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
-
+@import "~react-perfect-scrollbar/dist/css/styles.min.css";
 *:focus {
   outline: none !important;
   border: none !important;
 }
 
+.fade-enter {
+  opacity: .01;
+  transition: opacity 300ms ease-in;
 
+}
+
+.fade-enter-active {
+  transition: opacity 300ms ease-in;
+
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: .01;
+  transition: opacity 300ms ease-in;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import AppSection from "../../HOC/Section";
 
 class TeamWork extends React.Component {
     render() {
@@ -8,4 +9,4 @@ class TeamWork extends React.Component {
     }
 }
 
-export default TeamWork;
+export default AppSection(TeamWork);

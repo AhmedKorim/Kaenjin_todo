@@ -1,4 +1,5 @@
 import React from 'react';
+import AppSection from "../../HOC/Section";
 
 class Alarms extends React.Component {
     render() {
@@ -8,4 +9,4 @@ class Alarms extends React.Component {
     }
 }
 
-export default Alarms;
+export default AppSection(Alarms);
