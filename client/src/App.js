@@ -2,14 +2,13 @@ import React, {Component, Fragment} from 'react';
 import {hot} from 'react-hot-loader'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import {connect} from "react-redux";
-import './App.css';
 import {withRouter} from "react-router-dom";
+import './App.css';
 import {AppMainWrapper} from "./components/layout/AppMainWrapper";
 import MainHeader from "./components/layout/MainHeader/MainHeader";
-import Todos from "./components/Todo/Todos/Todo";
+import DraggableView from "./components/UI/DragbleView/DraggableView";
 import SidebarToggler from "./components/UI/Drawer/DrawerToggler";
 import MainFab from "./components/UI/MainFab/MainFab";
-import {Container} from "./components/UI/utilites";
 import AppRoutes from "./Containers/AppRoutes/AppRoutes";
 import {REMOVE_ALL, REMOVE_SELECTED} from "./store/actions/actionTypes";
 import {miniSideBarSelector} from "./store/selectors/layoutSelectors";
@@ -41,6 +40,7 @@ class App extends Component {
                         </div>
                     </PerfectScrollbar>
                 </AppMainWrapper>
+                <DraggableView/>
                 <MainFab/>
             </Fragment>
         );

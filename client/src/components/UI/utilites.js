@@ -7,10 +7,12 @@ export const LightIcon = styled(Icon)`
 color: #fff;
 `
 
+
 export const PositionedWrapper = styled.div.attrs({
     style: ({top, left, right, bottom, elevation, ...other}) =>
         ({top, left, right, bottom, zIndex: elevation, ...other})
 })`
+
 position: ${({position}) => position || 'absolute'};
 transition: all ease-in-out ${({duration}) => duration ? duration : 0};
 `;
