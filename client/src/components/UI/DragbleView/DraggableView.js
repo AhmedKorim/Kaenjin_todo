@@ -1,6 +1,10 @@
+import Icon from "@material-ui/core/Icon/Icon";
+import IconButton from "@material-ui/core/IconButton/IconButton";
 import Paper from "@material-ui/core/Paper/Paper";
 import React from 'react';
-import {PositionedWrapper} from "../utilites";
+import {Motion, spring} from "react-motion";
+import Fab from "../MainFab/Fab";
+import {MiniIconButton, PositionedWrapper, StopPropagation} from "../utilites";
 import * as $ from 'jquery';
 
 class DraggableView extends React.Component {
@@ -20,8 +24,8 @@ class DraggableView extends React.Component {
         if (!this.state.up) return;
 
         this.setState({
-            x:pageX - this.state.offsetX,
-            y:pageY - this.state.offsetY
+            x: pageX - this.state.offsetX,
+            y: pageY - this.state.offsetY
         })
     }
 
@@ -55,29 +59,47 @@ class DraggableView extends React.Component {
     };
 
     render() {
-        const springConfig = {stiffness: 300, damping: 50};
+        const config = {stiffness: 120, damping: 10, precision: .1};
         const {
             handleMouseDown,
             handleTouchStart,
             state: {
-                x, y
+                x, y, up
             }
         } = this;
         return (
             <PositionedWrapper
                 ref={node => this.wrapper = node}
-                width='400px'
-                height='400px'
+                width='250px'
+                height='200px'
                 position="fixed"
                 elevation="99999"
+                class="bg-dark"
                 top={y + 'px'}
                 left={x + 'px'}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleTouchStart}
             >
-                <Paper className="w-100 h-100" elevation={20}>
-                    hi
-                </Paper>
+                <Motion
+                    style={{shadow: spring(up ? 20 : 4, config)}}
+                    defaultStyle={{shadow: 4}}
+                >
+                    {({shadow}) => <Paper className="w-100 h-100"
+                                          elevation={Math.floor(shadow)}
+                    >
+                        <PositionedWrapper>
+                            <IconButton
+                                color="secondary"
+                                component={StopPropagation}
+
+
+                            >
+                                <Icon>close</Icon>
+                            </IconButton>
+                        </PositionedWrapper>
+                    </Paper>
+                    }
+                </Motion>
             </PositionedWrapper>
         )
     }

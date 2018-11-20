@@ -13,7 +13,7 @@ class MainFab extends React.Component {
     render() {
         const {open} = this.state;
         const confg = {stiffness: 600, damping: 10, precision: .01};
-        const manyFabConfig = {stiffness: 600, damping:20 , precision: .1};
+        const manyFabConfig = {stiffness: 600, damping:20 , precision: 1};
         const {handleMainClick} = this;
         console.log(open);
         const Defaultstyles = ['delete', 'info', 'alarm', 'play_arrow', 'menu', 'check', 'remove'].map(i =>  ({s: 0}) );

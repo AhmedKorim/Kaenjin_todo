@@ -1,5 +1,6 @@
 import {Icon, IconButton, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
+import ButtonBase from "@material-ui/core/ButtonBase/ButtonBase";
 import React from "react";
 import styled from 'styled-components';
 
@@ -7,6 +8,15 @@ export const LightIcon = styled(Icon)`
 color: #fff;
 `
 
+export const MiniIconButton = styled(IconButton)`
+&&{width: 30px;
+height: 30px;
+min-height: unset;
+min-width: unset;
+padding: 0;
+
+}
+`
 
 export const PositionedWrapper = styled.div.attrs({
     style: ({top, left, right, bottom, elevation, ...other}) =>
@@ -53,7 +63,8 @@ export const StopPropagation = (props) => {
         omMouseUp,
         onClick
     } = props
-    return <Button
+    console.log(props.color, 'StopPropagation');
+    return <ButtonBase
         {...props}
         onMouseDown={e => (e.stopPropagation(), onMouseDown && onMouseDown(e))}
         onTouchStart={e => (e.stopPropagation(), onTouchStart && onTouchStart(e))}

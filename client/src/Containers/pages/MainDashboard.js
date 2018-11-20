@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import TodoItem from "../../components/Todo/TodoItem/TodoItem";
 import AppSection from "../../HOC/Section";
 
 class MainDashboard extends React.Component {
@@ -30,7 +31,11 @@ class MainDashboard extends React.Component {
                    </div>
                </div>
             </div>
+            <div>
+                <TodoItem
 
+                />
+            </div>
         </Fragment>
 
     }
