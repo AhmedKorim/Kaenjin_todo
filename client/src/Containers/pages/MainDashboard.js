@@ -1,12 +1,38 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import AppSection from "../../HOC/Section";
 
 class MainDashboard extends React.Component {
     render() {
-        console.log('mounted [dasgbiard]');
-        return (            <div className="display-1 text-center">MainDashboard!</div>
 
-        )
+        return <Fragment>
+
+            <div className="container-fluid">
+               <div className="row">
+                   <div className="col-3 ">
+                    <div className="bg-danger p-4">
+
+                    </div>
+                   </div>
+                   <div className="col-3 ">
+                       <div className="bg-danger p-4">
+
+                       </div>
+                   </div>
+                   <div className="col-3 ">
+                       <div className="bg-danger p-4">
+
+                       </div>
+                   </div>
+                   <div className="col-3 ">
+                       <div className="bg-danger p-4">
+
+                       </div>
+                   </div>
+               </div>
+            </div>
+
+        </Fragment>
+
     }
 }
 

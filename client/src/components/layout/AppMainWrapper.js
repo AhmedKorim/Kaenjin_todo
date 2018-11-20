@@ -12,6 +12,8 @@ export const AppMainWrapper = styled.main.attrs({
   position:relative;
   transition: width 255ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   margin-left: auto;
+padding-left: 15px;
+padding-right:15px;
   overflow-x: hidden;
   height:100vh;
 `
