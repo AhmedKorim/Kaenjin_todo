@@ -2,7 +2,8 @@ import Fade from "@material-ui/core/Fade/Fade";
 import Icon from "@material-ui/core/Icon/Icon";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
-import React from 'react'
+import * as PropTypes from "prop-types";
+import React, {Component} from 'react'
 import {StyledTypography} from "../utilites";
 import {NavLink} from 'react-router-dom'
 
@@ -25,7 +26,7 @@ const AppNavigation = ({mini, expanded, links: {top, bottom}}) => {
                                 <div className="text-center  d-flex align-items-center ">
                                     <Icon color="primary">{icon}</Icon>
                                 </div>
-                                <Fade in={expanded || !mini} timeout={300}>
+                                <Fade in={expanded || !mini} timeout={300} style={{transitionDelay: (expanded || !mini) ? '.1s' : '0'}}>
                                     <div className="ml-2 d-flex  align-items-center justify-content-center">
                                         <StyledTypography
                                             fontSize="1rem"
@@ -48,8 +49,9 @@ const AppNavigation = ({mini, expanded, links: {top, bottom}}) => {
                                 <div className="text-center  d-flex align-items-center ">
                                     <Icon color="primary">{icon}</Icon>
                                 </div>
-                                <Fade in={expanded || !mini} timeout={300}>
-                                    <div className="ml-2 d-flex  align-items-center justify-content-center">
+                                <Fade in={expanded || !mini} timeout={300} style={{transitionDelay: (expanded || !mini) ? '.1s' : '0'}}>
+
+                                <div className="ml-2 d-flex  align-items-center justify-content-center">
                                         <StyledTypography
                                             fontSize="1rem"
                                             whiteSpace="nowrap"

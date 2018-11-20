@@ -30,8 +30,8 @@ class Sidebar extends React.Component {
                 anchor="left"
                 toggleDrawer={toggle}
                 mini={mini}
-                onMouseOver={() => handleExpantion(true)}
-                onMouseLeave={() => handleExpantion(false)}
+                onMouseOver={() => mini && handleExpantion(true)}
+                onMouseLeave={() => mini && handleExpantion(false)}
                 expanded={expanded}
             ><Fragment>
                 <AppBar
@@ -53,7 +53,7 @@ class Sidebar extends React.Component {
                                 }, {
                                     title: 'Projects',
                                     icon: 'card_travel'
-                                },{
+                                }, {
                                     title: 'Team_work',
                                     icon: 'group_work'
                                 }, {
@@ -71,14 +71,14 @@ class Sidebar extends React.Component {
                                     icon: 'insert_chart'
                                 }
                             ],
-                            bottom:[
+                            bottom: [
                                 {
-                                title: 'Settings',
-                                icon: 'settings'
-                            }, {
-                                title: 'Help',
-                                icon: 'help'
-                            },
+                                    title: 'Settings',
+                                    icon: 'settings'
+                                }, {
+                                    title: 'Help',
+                                    icon: 'help'
+                                },
                             ]
                         }
                     }
