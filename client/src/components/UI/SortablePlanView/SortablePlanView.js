@@ -14,7 +14,8 @@ class SortablePlanView extends React.Component {
             xBoxesCount: null,
             yBoxesCount: null,
             slotsNumber: null,
-            boxSizes: {width: 250, height: 280}
+            boxSizes: {width: 250, height: 280},
+            id:this.props.id ||( Math.random()*10+1).toFixed(2)
         }
     }
 
@@ -36,7 +37,7 @@ class SortablePlanView extends React.Component {
                     up: false,
                     offsetY: 0,
                     offsetX: 0,
-                    id: x + '' + y
+                    id: x + '' + y +`${this.state.id}`
                 })
 
             }
@@ -192,18 +193,19 @@ class SortablePlanView extends React.Component {
             handleMouseDown,
             handleTouchStart,
             state: {
-                top,
-                left,
-                containerGutter,
-                positions
+                positions,
+                boxSizes:{width,height}
+            },
+            props:{
+                children
             }
         } = this
         return (
             <div className="h-100  position-relative" ref={node => this.wrapper = node}>
                 {positions.map(({x, y, id, up}) => <StateLessDraggableView
                     key={id}
-                    width={250}
-                    height={280}
+                    width={width}
+                    height={height}
                     y={y}
                     x={x}
                     zIndex={up ? 10 : 5}
@@ -211,7 +213,7 @@ class SortablePlanView extends React.Component {
                     handleTouchStart={(e, $el) => handleTouchStart(e, $el, id)}
                     up={up}
                 >
-                    {id}
+                    {children}
                 </StateLessDraggableView>)}
             </div>
         )
