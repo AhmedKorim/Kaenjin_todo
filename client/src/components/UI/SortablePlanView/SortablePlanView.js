@@ -14,8 +14,9 @@ class SortablePlanView extends React.Component {
             xBoxesCount: null,
             yBoxesCount: null,
             slotsNumber: null,
-            boxSizes: {width: 250, height: 280},
-            id:this.props.id ||( Math.random()*10+1).toFixed(2)
+            boxSizes: props.boxSize,
+            gutter:props.gutter || 10,
+            id: this.props.id || (Math.random() * 10 + 1).toFixed(2)
         }
     }
 
@@ -23,21 +24,22 @@ class SortablePlanView extends React.Component {
 
         if (this.state.mounted) {
             let positions = [];
+            const gutter = this.state.gutter;
             let y = 0,
-                x=0;
-            for (let i = 0; i < 20; i++) {
+                x = 0;
+            for (let i = 0; i < this.props.cardNumber; i++) {
 
-                x = i %  this.state.xBoxesCount === 0 ? 0 : x+1;
-                y = i %  this.state.xBoxesCount === 0 && i !== 0 ? y + 1 : y;
+                x = i % this.state.xBoxesCount === 0 ? 0 : x + 1;
+                y = i % this.state.xBoxesCount === 0 && i !== 0 ? y + 1 : y;
                 positions.push({
-                    y: y * (this.state.boxSizes.height + 10) + 10,
-                    x: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
-                    staticY: y * (this.state.boxSizes.height + 10) + 10,
-                    staticX: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
+                    y: y * (this.state.boxSizes.height + gutter) + gutter,
+                    x: x * (this.state.boxSizes.width + gutter) + this.state.containerGutter + gutter,
+                    staticY: y * (this.state.boxSizes.height + gutter) + gutter,
+                    staticX: x * (this.state.boxSizes.width + gutter) + this.state.containerGutter + gutter,
                     up: false,
                     offsetY: 0,
                     offsetX: 0,
-                    id: x + '' + y +`${this.state.id}`
+                    id: x + '' + y + `${this.state.id}`
                 })
 
             }
@@ -46,15 +48,22 @@ class SortablePlanView extends React.Component {
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {
-        if(this.props.scroll === nextProps.scroll) return;
-        const ActiveCard = this.state.positions.find(card => card.up);
-        if(ActiveCard){
-            console.log('setting the new scroll');
+        if (this.props.scroll !== nextProps.scroll) {
+            const ActiveCard = this.state.positions.find(card => card.up);
+            if (ActiveCard) {
+                console.log('setting the new scroll');
+                this.setState({
+                    positions: this.state.positions.map(card => card.up ? {
+                        ...card,
+                        y: card.y + this.props.scroll - nextProps.scroll,
+                        offsetY: card.offsetY + this.props.scroll - nextProps.scroll
+                    } : card)
+                })
+            }
+        }
+        if (nextProps.boxSize !== this.props.boxSize) {
             this.setState({
-                positions:this.state.positions.map(card => card.up ? {...card,
-                    y:card.y +this.props.scroll - nextProps.scroll,
-                    offsetY:card.offsetY+this.props.scroll - nextProps.scroll
-                } :card)
+                boxSizes: nextProps.boxSize
             })
         }
     }
@@ -62,7 +71,8 @@ class SortablePlanView extends React.Component {
     handleMouseUp = () => {
         const activeCard = this.state.positions.find(card => card.up)
         if (!activeCard) return;
-        const nearCard = this.state.positions.find(card => Math.abs(card.x - activeCard.x) < 120 && Math.abs(card.y - activeCard.y) < 120 && card.id !== activeCard.id) || {id: null}
+        const {width,height} =this.state.boxSizes;
+        const nearCard = this.state.positions.find(card => Math.abs(card.x - activeCard.x) < width/2 && Math.abs(card.y - activeCard.y) < height/2 && card.id !== activeCard.id) || {id: null}
         if (nearCard.id) console.log('shit here');
         const newPositions = this.state.positions.map(position => {
             switch (position.id) {
@@ -129,7 +139,7 @@ class SortablePlanView extends React.Component {
                 {
                     ...position,
                     up: true,
-                    offsetY: pageY - top + thisTop -this.props.scroll,
+                    offsetY: pageY - top + thisTop - this.props.scroll,
                     offsetX: pageX - left + thisLeft,
                 }
                 : position
@@ -144,7 +154,8 @@ class SortablePlanView extends React.Component {
         if (wrapper) {
             // | | | |
             const boxDims = this.state.boxSizes;
-            const gutter = 10;
+            const gutter = this.state.gutter;
+
             const width = $(wrapper).width();
             const height = $(wrapper).height();
 
@@ -160,10 +171,9 @@ class SortablePlanView extends React.Component {
                 xBoxesCount: Math.floor(minSlotsNumberX),
                 yBoxesCount: Math.floor(minSlotsNumberY),
                 slotsNumber: Math.floor(slotsNumber),
-                containerGutter: ((width - gutter) - (Math.floor(minSlotsNumberX) * 260)) / 2
+                containerGutter: ((width - gutter) - (Math.floor(minSlotsNumberX) * this.state.boxSizes.width + 2 * gutter)) / 2
             }, this.createBoxes)
 
-            console.log('widht', ((width + gutter) - (Math.floor(minSlotsNumberX) * 260)) / 2);
         }
         // move start
         window.addEventListener('touchmove', this.handleTouchMove);
@@ -194,9 +204,9 @@ class SortablePlanView extends React.Component {
             handleTouchStart,
             state: {
                 positions,
-                boxSizes:{width,height}
+                boxSizes: {width, height}
             },
-            props:{
+            props: {
                 children
             }
         } = this
@@ -219,7 +229,8 @@ class SortablePlanView extends React.Component {
         )
     }
 }
-const mapStateToProps = state => ({scroll:mainScrollSelector(state)})
+
+const mapStateToProps = state => ({scroll: mainScrollSelector(state)})
 
 export default connect(mapStateToProps)(SortablePlanView);
 

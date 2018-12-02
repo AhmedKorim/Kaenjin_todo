@@ -25,8 +25,12 @@ class StateLessDraggableView extends Component {
                     class="bg-dark"
                     top={y + 'px'}
                     left={x + 'px'}
-                    onMouseDown={(e) => handleMouseDown(e, this.wrapper)}
-                    onTouchStart={(e) => handleTouchStart(e, this.wrapper)}
+                    onMouseDown={(e) => {
+                        e.stopPropagation()
+                        handleMouseDown(e, this.wrapper)}}
+                    onTouchStart={(e) => {
+                        e.stopPropagation()
+                        handleTouchStart(e, this.wrapper)}}
                 >
                     <Motion
                         style={{shadow: spring(up ? 20 : 4, this.config)}}
