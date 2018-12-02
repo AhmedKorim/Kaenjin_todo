@@ -61,6 +61,16 @@ class DraggableView extends React.Component {
         // move end
         window.addEventListener('mouseup', this.handleMouseUp);
     };
+    componentWillUnmount() {
+        // move start
+        window.removeEventListener('touchmove', this.handleTouchMove);
+        // move end
+        window.removeEventListener('touchend', this.handleMouseUp);
+        // move start
+        window.removeEventListener('mousemove', this.handleMouseMove);
+        // move end
+        window.removeEventListener('mouseup', this.handleMouseUp);
+    }
 
     render() {
         const config = {stiffness: 120, damping: 10, precision: .1};
