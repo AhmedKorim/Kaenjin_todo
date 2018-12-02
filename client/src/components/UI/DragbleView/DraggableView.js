@@ -19,13 +19,6 @@ class DraggableView extends React.Component {
         }
     }
 
-    state = {
-        x: 0,
-        y: 0,
-        up: false,
-        offsetY: 0,
-        offsetX: 0,
-    }
 
     handleMouseUp = () => {
         this.setState({up: false})
@@ -48,12 +41,12 @@ class DraggableView extends React.Component {
     handleMouseDown = ({pageY, pageX}) => {
         // the element it self
         const {top, left} = $(this.wrapper).offset();
-
+        const {parentOffset} = this.props;
 
         this.setState({
             up: true,
-            offsetY: pageY - top,
-            offsetX: pageX - left
+            offsetY: pageY - top + (parentOffset ? +parentOffset.y :0),
+            offsetX: pageX - left + (parentOffset ? +parentOffset.x :0),
         })
 
     }
@@ -123,6 +116,15 @@ class DraggableView extends React.Component {
                         {
                             children
                         }
+                        <div>
+                            {
+                                this.state.offsetX
+                            }
+                            <br/>
+                            {
+                                this.state.offsetY
+                            }
+                        </div>
                     </Paper>
                     }
                 </Motion>

@@ -42,35 +42,43 @@ class Plans extends React.Component {
             const minSlotsNumberY = (height - gutter) / (boxDims.height + gutter)
 
             const slotsNumber = minSlotsNumberY * minSlotsNumberX;
+            const {top, left} = $(this.wrapper).offset();
             this.setState({
+                top,
+                left,
                 mounted: true,
                 xBoxesCount: Math.floor(minSlotsNumberX),
                 yBoxesCount: Math.floor(minSlotsNumberY),
                 slotsNumber: Math.floor(slotsNumber),
-                containerGutter: ((width - gutter ) - (Math.floor(minSlotsNumberX) * 260)) / 2
+                containerGutter: ((width - gutter) - (Math.floor(minSlotsNumberX) * 260)) / 2
             }, this.createBoxes)
-            console.log('widht' ,   ((width + gutter ) - (Math.floor(minSlotsNumberX) * 260))/2  );
+            console.log('widht', ((width + gutter) - (Math.floor(minSlotsNumberX) * 260)) / 2);
         }
     }
 
     render() {
-        console.log(this.state);
+        const {
+            state: {
+                top,
+                left,
+                containerGutter
+            }
+        } = this
         return (
-            <div className="h-100 bg-danger position-relative" ref={node => this.wrapper = node}>
+            <div className="h-100  position-relative" ref={node => this.wrapper = node}>
                 {
                     (this.state.mounted && this.state.positions) && <Fragment>
                         {
                             this.state.positions.map(({x, y}) => <DraggableView
                                 width={250}
                                 height={280}
+                                parentOffset={{
+                                    y: top, x: left
+                                }}
                                 className="bg-dark"
-                                y={y * (280 + 10) +10  }
-                                x={x * (250 + 10) + this.state.containerGutter+10}
+                                y={y * (280 + 10) + 10}
+                                x={x * (250 + 10) + containerGutter + 10}
                             >
-                                top={y * (280 + this.state.containerGutter) + this.state.containerGutter+10 + 'px'}
-                                left={x * (250 + this.state.containerGutter) + this.state.containerGutter+10 + 'px'}
-                                <br/>
-                                container gutter ={this.state.containerGutter}
                             </DraggableView>)
                         }
                     </Fragment>
