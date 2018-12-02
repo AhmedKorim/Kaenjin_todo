@@ -1,10 +1,12 @@
 import * as $ from 'jquery'
 import React from 'react';
+import {connect} from "react-redux";
+import {mainScrollSelector} from "../../../store/selectors/layoutSelectors";
 import StateLessDraggableView from "../StateLessDraggableView/StateLessDraggableView";
 
 
 class SortablePlanView extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             mounted: false,
@@ -12,66 +14,84 @@ class SortablePlanView extends React.Component {
             xBoxesCount: null,
             yBoxesCount: null,
             slotsNumber: null,
-            boxSizes:{width: 250, height: 280}
+            boxSizes: {width: 250, height: 280}
         }
     }
+
     createBoxes() {
+
         if (this.state.mounted) {
             let positions = [];
-            for (let x = 0; x < this.state.xBoxesCount; x++) {
-                for (let y = 0; y < this.state.yBoxesCount; y++) {
-                    console.log(this.state.containerGutter);
-                    positions.push({
-                        y: y * (this.state.boxSizes.height + 10) + 10,
-                        x: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
-                        staticY: y * (this.state.boxSizes.height + 10) + 10,
-                        staticX: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
-                        up: false,
-                        offsetY: 0,
-                        offsetX: 0,
-                        id: x + '' + y
-                    })
-                }
+            let y = 0,
+                x=0;
+            for (let i = 0; i < 20; i++) {
+
+                x = i %  this.state.xBoxesCount === 0 ? 0 : x+1;
+                y = i %  this.state.xBoxesCount === 0 && i !== 0 ? y + 1 : y;
+                positions.push({
+                    y: y * (this.state.boxSizes.height + 10) + 10,
+                    x: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
+                    staticY: y * (this.state.boxSizes.height + 10) + 10,
+                    staticX: x * (this.state.boxSizes.width + 10) + this.state.containerGutter + 10,
+                    up: false,
+                    offsetY: 0,
+                    offsetX: 0,
+                    id: x + '' + y
+                })
+
             }
             this.setState({positions: [...positions]})
         }
     }
 
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if(this.props.scroll === nextProps.scroll) return;
+        const ActiveCard = this.state.positions.find(card => card.up);
+        if(ActiveCard){
+            console.log('setting the new scroll');
+            this.setState({
+                positions:this.state.positions.map(card => card.up ? {...card,
+                    y:card.y +this.props.scroll - nextProps.scroll,
+                    offsetY:card.offsetY+this.props.scroll - nextProps.scroll
+                } :card)
+            })
+        }
+    }
 
     handleMouseUp = () => {
         const activeCard = this.state.positions.find(card => card.up)
         if (!activeCard) return;
-        const nearCard = this.state.positions.find(card => Math.abs(card.x - activeCard.x) < 120 && Math.abs(card.y - activeCard.y) < 120 && card.id !== activeCard.id) || {id:null}
-        if(nearCard.id) console.log('shit here');
+        const nearCard = this.state.positions.find(card => Math.abs(card.x - activeCard.x) < 120 && Math.abs(card.y - activeCard.y) < 120 && card.id !== activeCard.id) || {id: null}
+        if (nearCard.id) console.log('shit here');
         const newPositions = this.state.positions.map(position => {
             switch (position.id) {
                 case nearCard.id :
                     return {
                         ...position,
-                        staticX:activeCard.staticX,
-                        staticY:activeCard.staticY,
-                        x:activeCard.staticX,
-                        y:activeCard.staticY
+                        staticX: activeCard.staticX,
+                        staticY: activeCard.staticY,
+                        x: activeCard.staticX,
+                        y: activeCard.staticY
                     }
                 case activeCard.id :
-                    return  nearCard.id !== null ? {
+                    return nearCard.id !== null ? {
                         ...position,
-                        up:false,
-                        staticX:nearCard.staticX,
-                        staticY:nearCard.staticY,
-                        x:nearCard.staticX,
+                        up: false,
+                        staticX: nearCard.staticX,
+                        staticY: nearCard.staticY,
+                        x: nearCard.staticX,
                         y: nearCard.staticY
-                    }: {
+                    } : {
                         ...position,
-                        x:activeCard.staticX,
-                        y:activeCard.staticY,
-                        up:false
+                        x: activeCard.staticX,
+                        y: activeCard.staticY,
+                        up: false
                     }
                 default:
                     return position
             }
         })
-        this.setState({positions:newPositions})
+        this.setState({positions: newPositions})
     }
 
     handleMouseMove = ({pageY, pageX}) => {
@@ -108,7 +128,7 @@ class SortablePlanView extends React.Component {
                 {
                     ...position,
                     up: true,
-                    offsetY: pageY - top + thisTop,
+                    offsetY: pageY - top + thisTop -this.props.scroll,
                     offsetX: pageX - left + thisLeft,
                 }
                 : position
@@ -197,17 +217,7 @@ class SortablePlanView extends React.Component {
         )
     }
 }
+const mapStateToProps = state => ({scroll:mainScrollSelector(state)})
 
-export default SortablePlanView;
-/*
-*
-* PhpStorm 2018.2
-Build #PS-182.3684.42, built on July 26, 2018
-Licensed to ahmed korim
-Subscription is active until January 15, 2019
-JRE: 1.8.0_152-release-1248-b8 amd64
-JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
-Windows 7 6.1
-*
-*
-* */
+export default connect(mapStateToProps)(SortablePlanView);
+

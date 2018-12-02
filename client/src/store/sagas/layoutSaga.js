@@ -1,6 +1,6 @@
 import {put, select, takeLatest} from 'redux-saga/effects'
-import {HANDLE_HEADER_HEIGHT, HANDLE_NAVIGATION_SIZE, HANDLE_NAVIGATION_VISIBILITY, HANDLE_SECTION_SIZE} from "../actions/actionTypes";
-import {sectionSizeAction, sideBarSizeAction, sideBarTogglerAction} from "../actions/layoutActions";
+import {HANDLE_HEADER_HEIGHT, HANDLE_MAIN_SCROLL, HANDLE_NAVIGATION_SIZE, HANDLE_NAVIGATION_VISIBILITY, HANDLE_SECTION_SIZE} from "../actions/actionTypes";
+import {mainScrollAction, sectionSizeAction, sideBarSizeAction, sideBarTogglerAction} from "../actions/layoutActions";
 import {miniSideBarSelector, sectionHeightSelector, sideBarSelector} from "../selectors/layoutSelectors";
 
 export function* headerHandler(headerProcess) {
@@ -23,10 +23,14 @@ export function* handleSidebarSize() {
 export function* handleSectionSize({sectionSize}) {
     yield put(sectionSizeAction(sectionSize));
 }
+export function* handleScroll({scroll}) {
+    yield put(mainScrollAction(scroll));
+}
 
 export function* layoutSaga() {
     const sidebarProcess = yield takeLatest(HANDLE_NAVIGATION_VISIBILITY, sideBarHandler)
     const headerProcess = yield takeLatest(HANDLE_HEADER_HEIGHT, headerHandler)
     const sidebarSizeProcess = yield takeLatest(HANDLE_NAVIGATION_SIZE, handleSidebarSize)
     yield takeLatest(HANDLE_SECTION_SIZE, handleSectionSize)
+    yield  takeLatest(HANDLE_MAIN_SCROLL,handleScroll)
 }

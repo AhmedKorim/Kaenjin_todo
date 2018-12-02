@@ -1,4 +1,4 @@
-import {SET_SECTION_HEIGHT, TOGGLE_NAVIGATION_SIZE, TOGGLE_NAVIGATION_VISIBILITY} from "./actionTypes";
+import {SET_MAIN_SCROLL, SET_SECTION_HEIGHT, TOGGLE_NAVIGATION_SIZE, TOGGLE_NAVIGATION_VISIBILITY} from "./actionTypes";
 
 export const sideBarTogglerAction = (sidebarVisible) => ({
     type:TOGGLE_NAVIGATION_VISIBILITY,
@@ -18,6 +18,15 @@ export const sectionSizeAction = (sectionSize) => {
         type: SET_SECTION_HEIGHT,
         payload: {
             sectionSize
+        }
+    });
+}
+export const mainScrollAction = (scroll) => {
+    console.log(scroll);
+    return ({
+        type: SET_MAIN_SCROLL,
+        payload: {
+            scroll
         }
     });
 }

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {hot} from 'react-hot-loader'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import {connect} from "react-redux";
@@ -7,12 +7,10 @@ import './App.css';
 import {AppMainWrapper} from "./components/layout/AppMainWrapper";
 import MainHeader from "./components/layout/MainHeader/MainHeader";
 import PomodoroTimer from "./components/layout/PomodoroTimer/Pomodoro";
-import DraggableView from "./components/UI/DragbleView/DraggableView";
 import SidebarToggler from "./components/UI/Drawer/DrawerToggler";
 import MainFab from "./components/UI/MainFab/MainFab";
 import AppRoutes from "./Containers/AppRoutes/AppRoutes";
-import {DarkTheme} from "./HOC/WithContextColors";
-import {REMOVE_ALL, REMOVE_SELECTED} from "./store/actions/actionTypes";
+import {HANDLE_MAIN_SCROLL, REMOVE_ALL, REMOVE_SELECTED} from "./store/actions/actionTypes";
 import {miniSideBarSelector} from "./store/selectors/layoutSelectors";
 
 class App extends Component {
@@ -25,18 +23,17 @@ class App extends Component {
         } catch (e) {
 
         }
-
     }
 
 
     render() {
-        const {removeAll, removeSelected, miniHeader} = this.props;
+        const {removeAll, removeSelected, miniHeader,setCurrentScroll} = this.props;
         return (
             <div className="APP__ROOT">
                 <SidebarToggler/>
                 <MainHeader/>
                 <AppMainWrapper headerHeight={60} mini={miniHeader}>
-                    <PerfectScrollbar>
+                    <PerfectScrollbar onScrollY={container => container && setCurrentScroll(container.scrollTop)}>
                         <div>
                             <AppRoutes/>
                         </div>
@@ -53,7 +50,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
     removeAll: () => dispatch({type: REMOVE_ALL,}),
-    removeSelected: () => dispatch({type: REMOVE_SELECTED})
+    removeSelected: () => dispatch({type: REMOVE_SELECTED}),
+    setCurrentScroll: (scroll) => dispatch({type:HANDLE_MAIN_SCROLL,scroll})
 })
 
 const mapStateToProps = state => ({

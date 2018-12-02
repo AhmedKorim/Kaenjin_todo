@@ -4,7 +4,13 @@
   outline: none !important;
   border: none !important;
 }
-
+body{
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
 .fade-enter {
   opacity: .01;
   transition: opacity 300ms ease-in;
