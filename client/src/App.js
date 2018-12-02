@@ -32,7 +32,7 @@ class App extends Component {
     render() {
         const {removeAll, removeSelected, miniHeader} = this.props;
         return (
-            <Fragment>
+            <div className="APP__ROOT">
                 <SidebarToggler/>
                 <MainHeader/>
                 <AppMainWrapper headerHeight={60} mini={miniHeader}>
@@ -44,7 +44,7 @@ class App extends Component {
                 </AppMainWrapper>
                 <PomodoroTimer/>
                 <MainFab/>
-            </Fragment>
+            </div>
 
         )
             ;

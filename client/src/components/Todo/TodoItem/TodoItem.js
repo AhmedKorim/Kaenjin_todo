@@ -16,6 +16,7 @@ import {LightIcon, MiniIconButton, PositionedWrapper, StopPropagation, StyledBut
 
 const Wrapper = styled(Paper)`
 width: 400px;
+max-width: 100%;
 height: 75px;
 margin: .2rem auto;
 position:relative;
@@ -176,18 +177,8 @@ class TodoItem extends Component {
                         <ButtonBase
                             className="w-100 h-100 d-block base-wrapper" component="div">
                             <div className="row h-100 no-gutters justify-content-center">
-                                <div className="col-2 py-2 h-100 flex-column  d-flex align-items-sm-start bg-success">
-                                    <StyledTypography
-                                        component="div"
-                                        textTransform="capitalize"
-                                        fontSize="1rem"
-                                        textAlign="center"
-                                        display="block"
-                                        width="100%"
-                                        color="#fff"
-                                    >
-                                        00 : 57
-                                    </StyledTypography>
+                                <div className=" pl-1 h-100  bg-success">
+
                                 </div>
                                 <div className="col p-0 ">
                                     <div className="col-12 h-50 p-2 ">

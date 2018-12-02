@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const AppMainWrapper = styled.main.attrs({
-    style: ({headerHeight,mini}) => {
+    style: ({headerHeight, mini}) => {
         console.log(headerHeight);
         return {
-            paddingTop:(headerHeight ||68) +10,
-            width: `calc(100vw - ${mini? '80px' : '240px'})`
+            paddingTop: (headerHeight || 68) + 10,
+            width: `calc(100vw - ${mini ? '80px' : '240px'})`
         }
     }
 })`

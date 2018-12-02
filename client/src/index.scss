@@ -10,6 +10,12 @@
   transition: opacity 300ms ease-in;
 
 }
+.APP__ROOT{
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 
 .fade-enter-active {
   transition: opacity 300ms ease-in;

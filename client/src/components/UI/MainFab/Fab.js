@@ -21,7 +21,7 @@ const Fab = ({bottom, right, mini, position, children, classes, transform, ...ot
             transform={transform}
             right={right}
         >
-            <Tooltip title="action" classes={{tooltip:   classes.Tooltip}} placement="right" open TransitionComponent={Zoom}>
+            <Tooltip title="action" classes={{tooltip:   classes.Tooltip}} open={false} placement="right"  TransitionComponent={Zoom}>
                 <Button variant="fab" color="primary"
                         mini={mini}
                         {...other}

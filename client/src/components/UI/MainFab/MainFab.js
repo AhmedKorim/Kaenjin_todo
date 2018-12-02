@@ -16,7 +16,7 @@ class MainFab extends React.Component {
         const manyFabConfig = {stiffness: 600, damping:20 , precision: .1};
         const {handleMainClick} = this;
         console.log(open);
-        const Defaultstyles = ['delete', 'info', 'alarm', 'play_arrow', 'menu', 'check', 'remove'].map(i =>  ({s: 0}) );
+        const Defaultstyles = ['assignment', 'mic', 'alarm', 'card_travel'].map(i =>  ({s: 0}) );
         return (
             <Fragment>
                 <Motion
@@ -69,7 +69,7 @@ class MainFab extends React.Component {
                                 bottom={76 + (i + 1) * (40 + 12)}
                                 right={68}
                                 transform={`scale(${s})`}
-                            >{['delete', 'info', 'alarm', 'play_arrow', 'menu', 'check', 'remove'][i]}</Fab>)
+                            >{['assignment', 'mic', 'alarm', 'card_travel'][i]}</Fab>)
                         }
                     </Fragment>
                     }

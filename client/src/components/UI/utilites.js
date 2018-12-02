@@ -1,4 +1,4 @@
-import {Icon, IconButton, Typography} from "@material-ui/core";
+import {Icon, IconButton, Paper, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button/Button";
 import ButtonBase from "@material-ui/core/ButtonBase/ButtonBase";
 import React from "react";
@@ -52,7 +52,9 @@ border-radius: 50% !important;
 height: 40px;
 width: 40px;}
 `
-
+export const StyledPaper = styled(Paper).attrs({
+    style:({shadow}) => ({boxShadow:shadow})
+})``
 
 export const StyledTypography = styled(Typography).attrs({
     style: ({fontWeight, textTransform, bold, color, ...other}) => ({
@@ -89,9 +91,11 @@ transform: translate3d(-50%,-50%,0) scale(1);
 border-radius: 50%;
 
 `
+
 export const MinWidht = styled.div`
 min-width:${({MW}) => MW + 'px'}
 `
+
 
 export const DumbWrapper = styled.div.attrs({
     style: ({...s}) => ({...s})

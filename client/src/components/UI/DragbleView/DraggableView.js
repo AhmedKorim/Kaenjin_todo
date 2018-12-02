@@ -1,4 +1,3 @@
-import Button from "@material-ui/core/Button/Button";
 import Grow from "@material-ui/core/Grow/Grow";
 import Icon from "@material-ui/core/Icon/Icon";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -8,6 +7,18 @@ import {Motion, spring} from "react-motion";
 import {MiniButton, MiniFabButton, PositionedWrapper, StopPropagation} from "../utilites";
 
 class DraggableView extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            x: this.props.x || 0,
+            y: this.props.y || 0,
+            up: false,
+            offsetY: 0,
+            offsetX: 0,
+        }
+    }
+
     state = {
         x: 0,
         y: 0,
@@ -60,7 +71,12 @@ class DraggableView extends React.Component {
 
     render() {
         const config = {stiffness: 120, damping: 10, precision: .1};
-        const {children} = this.props;
+        const {
+            children, closeBtn,
+            width,
+            height,
+            ...rest
+        } = this.props;
         const {
             handleMouseDown,
             handleTouchStart,
@@ -70,10 +86,11 @@ class DraggableView extends React.Component {
         } = this;
         return (
             <PositionedWrapper
+                {...rest}
                 ref={node => this.wrapper = node}
-                width='280px'
-                height='250px'
-                position="fixed"
+                width={width ||'280px'}
+                height={height || '250px'}
+                position="absolute"
                 elevation="99999"
                 class="bg-dark"
                 top={y + 'px'}
@@ -93,7 +110,7 @@ class DraggableView extends React.Component {
                             top="0"
                             transform="translate3d(50%,-50%,0)"
                         >
-                            <Grow unmountOnExit mountOnEnter in={!up} timeout={300}>
+                            <Grow unmountOnExit mountOnEnter in={!up && closeBtn} timeout={300}>
                                 <MiniButton
                                     color="secondary"
                                     variant="fab"

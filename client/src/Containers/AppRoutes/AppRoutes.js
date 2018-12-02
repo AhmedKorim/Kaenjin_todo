@@ -11,7 +11,7 @@ import Projects from "../pages/Projects";
 import Settings from "../pages/Settings";
 import Statistics from "../pages/Statistics";
 import TeamWork from "../pages/TeamWork";
-import WeekPlan from "../pages/WeekPlan";
+import WeekPlan from "../pages/Plans/Plans";
 
 const AppRoutes = props => {
     return (
@@ -31,7 +31,7 @@ const AppRoutes = props => {
                                 component={MainDashboard}
                             />
                             <Route
-                                path='/week_plan'
+                                path='/plans'
                                 component={WeekPlan}
                             />
                             <Route

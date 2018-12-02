@@ -1,4 +1,4 @@
-import {TOGGLE_NAVIGATION_SIZE, TOGGLE_NAVIGATION_VISIBILITY} from "./actionTypes";
+import {SET_SECTION_HEIGHT, TOGGLE_NAVIGATION_SIZE, TOGGLE_NAVIGATION_VISIBILITY} from "./actionTypes";
 
 export const sideBarTogglerAction = (sidebarVisible) => ({
     type:TOGGLE_NAVIGATION_VISIBILITY,
@@ -12,3 +12,12 @@ export const sideBarSizeAction = (sideBarSize) => ({
         sideBarSize
     }
 })
+export const sectionSizeAction = (sectionSize) => {
+    console.log(sectionSize);
+    return ({
+        type: SET_SECTION_HEIGHT,
+        payload: {
+            sectionSize
+        }
+    });
+}

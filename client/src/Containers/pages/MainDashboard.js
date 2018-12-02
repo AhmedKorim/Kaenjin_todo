@@ -32,7 +32,7 @@ class MainDashboard extends React.Component {
                    <div className="col-12 mt-4"></div>
                    <div className="col-6 ">
                        <div className="bg-dark h">
-
+                <TodoItem/>
                        </div>
                    </div>
                    <div className="col-6 ">

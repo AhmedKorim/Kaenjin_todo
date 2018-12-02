@@ -24,7 +24,8 @@ class PomodoroTimer extends React.Component {
         console.log(navValue);
         return (
 
-            <DraggableView>
+            <DraggableView closeBtn
+            >
                 <div className="d-flex h-100 flex-column">
                     <div className="mt-auto">
                         <Divider/>
